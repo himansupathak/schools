@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,14 +30,14 @@ import com.him.schoolmanagementsystem.service.PostService;
 
 @RestController
 @RequestMapping(value = "/api/post")
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PostController {
 
 	@Autowired
 	PostService postService;
 
 	@RequestMapping(method = RequestMethod.POST, consumes = { "multipart/form-data" })
-	public ResponseEntity<ResponseInfo<String>> addEmployee(@RequestPart("requestInfo") String requestInfo,
+	public ResponseEntity<ResponseInfo<String>> addPost(@RequestPart("requestInfo") String requestInfo,
 			@RequestPart("file") MultipartFile file) throws MainException, IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -140,7 +141,7 @@ public class PostController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseInfo<String>> deleteRole(@PathVariable("id") int id) throws MainException {
+	public ResponseEntity<ResponseInfo<String>> deletePost(@PathVariable("id") int id) throws MainException {
 
 		String result = null;
 		try {
